@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+      "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="uk.ac.bham.cs.music.model.impl">
+	<class name="ArtistImpl" table="artist">
+		<id name="id">
+			<generator class="native">
+				<param name = "sequence">artist_seq</param>
+				</generator>
+		</id>
+		<property name="name" not-null="true" unique="true" />
+		<property name="formationDate" not-null="true"
+			type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate" />
+		<property name="disbandmentDate" not-null="false"
+			type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate" />
+		<set name="albums" lazy="true" order-by="releaseDate">
+			<key column="artist_id" />
+			<one-to-many class="AlbumImpl" />
+		</set>
+	</class>
+</hibernate-mapping>
