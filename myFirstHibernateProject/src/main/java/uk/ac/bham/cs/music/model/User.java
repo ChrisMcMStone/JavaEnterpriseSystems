@@ -1,8 +1,7 @@
 package uk.ac.bham.cs.music.model;
 
 import java.util.Set;
-
-import org.joda.time.LocalTime;
+import org.joda.time.LocalDate;
 
 public interface User {
 	/**
@@ -80,14 +79,14 @@ public interface User {
 	 * 
 	 * @return The registration time of the user.
 	 */
-	public LocalTime getRegistrationTime();
+	public LocalDate getRegistrationDate();
 	
 	/**
 	 * Set the registration time of the user.
 	 * 
 	 * @param registrationTime the time of registration.
 	 */
-	public void setRegistrationTime(LocalTime registrationTime);
+	public void setRegistrationDate(LocalDate registrationDate);
 	
 	/**
 	 * Get the user's basket.
@@ -116,4 +115,5 @@ public interface User {
 	 * @param purchases the user's purchases
 	 */
 	public void setPurchases(Set<Purchase> purchases);
+
 }

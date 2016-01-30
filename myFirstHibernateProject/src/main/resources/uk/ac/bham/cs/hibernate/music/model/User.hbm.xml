@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+      "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="uk.ac.bham.cs.music.model.impl">
+	<class name="UserImpl" table="users">
+		<id name="id">
+			<generator class="identity"/>
+		</id>
+		<property name="name" not-null="true" />
+		<property name="username" not-null="true" unique="true"/>
+		<property name="password" not-null="true"/>
+		<property name="active" not-null="true"/>
+		<property name="registrationDate" not-null="false"
+			type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate" />
+
+		<!--  One to Many relationship with Purchases -->
+		<set name="purchases" lazy="true" order-by="purchaseDate">
+			<key column="purchase_id"/>
+			<one-to-many class="PurchaseImpl"/>
+		</set>
+
+		<!-- Many to Many relationship with Tracks (Basket) -->
+		<set name="basket" cascade="all" table="basket">
+			<key column="users_id"/>
+			<many-to-many column="track_id" class="TrackImpl" />
+		</set>
+
+	</class>
+</hibernate-mapping>
+
+
+<!-- Ask:
+- Naming sequences
+- Lazy property
+- Order by property -->

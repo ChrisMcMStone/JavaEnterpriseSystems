@@ -24,10 +24,13 @@ public class TrackImpl implements Track {
 	 */
 	private Duration length;
 	
+	private Double price;
 	/**
 	 *  Track Album
 	 */
 	private Set<Album> albums;
+	
+	private Set<Purchase> purchases;
 	
 	@Override
 	public Integer getId() {
@@ -71,11 +74,23 @@ public class TrackImpl implements Track {
 
 	@Override
 	public Set<Purchase> getPurchases() {
-		throw new UnsupportedOperationException("");
+		return purchases;
 	}
 
 	@Override
-	public void setPurchases(Set<Purchase> purchasedBy) {
-		throw new UnsupportedOperationException("");
+	public void setPurchases(Set<Purchase> purchases) {
+		this.purchases = purchases;
 	}
+
+	@Override
+	public Double getPrice() {
+		return price;
+	}
+
+	@Override
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	
 }

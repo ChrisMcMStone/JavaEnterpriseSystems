@@ -78,4 +78,9 @@ public interface Track {
 	 * @param purchasedBy the list of purchase orders that include this track.
 	 */
 	public void setPurchases(Set<Purchase> purchasedBy);
+	
+	public Double getPrice();
+	
+	public void setPrice(Double price);
+	
 }

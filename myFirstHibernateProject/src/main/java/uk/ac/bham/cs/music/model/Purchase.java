@@ -60,4 +60,7 @@ public interface Purchase {
 	 * @param tracks The tracks that were purchased.
 	 */
 	public void setTracks(Set<Track> tracks);
+	
+	public Double getPrice();
+	public void setPrice(Double price);
 }
