@@ -2,6 +2,7 @@ package uk.ac.bham.cs.music.model.impl;
 
 import java.util.Set;
 
+import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 import uk.ac.bham.cs.music.model.Purchase;
@@ -11,7 +12,7 @@ import uk.ac.bham.cs.music.model.User;
 public class PurchaseImpl implements Purchase {
 
 	private Integer id;
-	private LocalTime purchaseDate;
+	private LocalDate purchaseDate;
 	private User user;
 	private Set<Track> tracks;
 	private Double price;
@@ -27,12 +28,12 @@ public class PurchaseImpl implements Purchase {
 	}
 
 	@Override
-	public LocalTime getPurchaseDate() {
+	public LocalDate getPurchaseDate() {
 		return purchaseDate;
 	}
 
 	@Override
-	public void setPurchaseDate(LocalTime purchaseDate) {
+	public void setPurchaseDate(LocalDate purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 

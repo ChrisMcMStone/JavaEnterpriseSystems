@@ -71,3 +71,13 @@ insert into album values(nextval('album_id_seq'), 'Polaris', (select id from art
 insert into album values(nextval('album_id_seq'), 'Altered State', (select id from artist where name='TesseracT'), date '2013-05-27', 7.99);
 
 update track set length = length * 1000;
+
+
+insert into users values(nextval('users_id_seq'), 'Chris', 'cxm373', 'password123', True, date '01-02-2010');
+insert into users values(nextval('users_id_seq'), 'Tom', 'txs142', '12345678', False, date '28-06-2004');
+
+insert into basket(users_id, track_id)
+select (select id from users where username = 'cxm373'), id from track where id between 16 and 27;
+
+insert into basket(users_id, track_id)
+select (select id from users where username = 'txs142'), id from track where id between 20 and 27;

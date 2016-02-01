@@ -25,9 +25,7 @@
 		<!-- Inverse = True because purchase is the relationship owner i.e. a purchase has tracks-->
 		<set name="purchases" table="purchase_track" inverse="true">
 				<key column="track_id" not-null="true" />
-			<many-to-many class="PurchaseImpl">
-				<column name="purchase_id" not-null="true" />
-			</many-to-many>
+			<many-to-many column="purchase_id" class="PurchaseImpl"/>
 		</set>
 		
 		<!-- Many to Many with User -->

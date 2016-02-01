@@ -56,10 +56,8 @@
 				<configuration>
 					<mainClass>uk.ac.bham.cs.hibernate.music.Main</mainClass>
 					<arguments>
-<!-- 						<argument>InsertArtist</argument>
-						<argument>Green Day</argument>
-						<argument>11-01-1995</argument>
- -->						<argument>ShowArtists</argument>
+						<argument>ShowUser</argument>
+						<argument>cxm373</argument>
 					</arguments>
 				</configuration>
 			</plugin>

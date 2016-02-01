@@ -11,7 +11,7 @@
 		<property name="username" not-null="true" unique="true"/>
 		<property name="password" not-null="true"/>
 		<property name="active" not-null="true"/>
-		<property name="registrationDate" not-null="false"
+		<property name="registrationDate" not-null="true"
 			type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate" />
 
 		<!--  One to Many relationship with Purchases -->
@@ -21,7 +21,7 @@
 		</set>
 
 		<!-- Many to Many relationship with Tracks (Basket) -->
-		<set name="basket" cascade="all" table="basket">
+		<set name="basket" cascade="all" table="basket" lazy="false">
 			<key column="users_id"/>
 			<many-to-many column="track_id" class="TrackImpl" />
 		</set>

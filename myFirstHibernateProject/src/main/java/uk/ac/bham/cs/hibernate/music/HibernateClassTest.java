@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 import org.joda.time.LocalDate;
 
 import uk.ac.bham.cs.hibernate.HibernateService;
@@ -132,10 +133,15 @@ public class HibernateClassTest implements HibernateService, MusicService {
 			tx.commit();
 			
 		} catch (HibernateException e) {
-			e.printStackTrace();
 			if(tx != null) {
 				tx.rollback();
 			}
+			if(e instanceof ConstraintViolationException) {
+				throw new IllegalArgumentException("Artist \""+name+"\" already exists in database");
+			} else {
+				e.printStackTrace();
+			}
+			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
 

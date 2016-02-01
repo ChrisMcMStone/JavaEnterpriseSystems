@@ -2,7 +2,7 @@ package uk.ac.bham.cs.music.model;
 
 import java.util.Set;
 
-import org.joda.time.LocalTime;
+import org.joda.time.LocalDate;
 
 public interface Purchase {
 	/**
@@ -24,14 +24,14 @@ public interface Purchase {
 	 * 
 	 * @return The purchase date.
 	 */
-	public LocalTime getPurchaseDate();
+	public LocalDate getPurchaseDate();
 	
 	/**
 	 * Set the purchase date.
 	 * 
 	 * @param purchaseDate the date of registration.
 	 */
-	public void setPurchaseDate(LocalTime purchaseDate);
+	public void setPurchaseDate(LocalDate purchaseDate);
 	
 	/**
 	 * Get the buyer.

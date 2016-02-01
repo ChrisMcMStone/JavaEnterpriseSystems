@@ -1,6 +1,5 @@
 package uk.ac.bham.cs.hibernate.music;
 
-
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -17,7 +16,9 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import uk.ac.bham.cs.music.MusicServiceExercise;
 import uk.ac.bham.cs.music.model.Album;
 import uk.ac.bham.cs.music.model.Artist;
+import uk.ac.bham.cs.music.model.Purchase;
 import uk.ac.bham.cs.music.model.Track;
+import uk.ac.bham.cs.music.model.User;
 
 public class Main {
 	public static void main(String[] args) {
@@ -170,19 +171,86 @@ public class Main {
 				} catch(IllegalArgumentException e) {
 					System.err.println(e.getMessage());
 				}
+			} else if (cmd.equals("ShowUser") && args.length == 2) {
+				try {
+					String username = args[1];
+					User user = service.getUser(username);
+					System.out.println(String.format("%-10s | %-10s | %-17s | %-10s", "Name", "Username",
+							"Registration Date", "Active?"));
+					System.out.println("==================================================");
+					System.out.println(String.format("%-10s | %-10s | %-17s | %-10s", user.getName(),
+							user.getUsername(), user.getRegistrationDate(), user.isActive()));
+				} catch (IllegalArgumentException e) {
+					System.err.println(e.getMessage());
+					e.printStackTrace();
+				}
+			} else if (cmd.equals("AddToBasket") && args.length == 3) {
+				String username = args[1];
+				int trackID = 0;
+				User user = null;
+				Track track = null;
+				try {
+					trackID = Integer.parseInt(args[2]);
+				} catch (NumberFormatException e) {
+					System.err.println("Track ID must be a valid integer");
+					return;
+				}
+				try {
+					user = service.getUser(username);
+					track = service.getTrackById(trackID);
+					service.addToBasket(user, track);
+					System.out.println("Track has been added to the users basket.");
+				} catch (IllegalArgumentException e) {
+					System.err.println(e.getMessage());
+					e.printStackTrace();
+				}
+			} else if (cmd.equals("GetPurchases") && args.length == 2) {
+				String username = args[1];
+				User user = null;
+				try {
+					user = service.getUser(username);
+					List<Purchase> purchases = service.getPurchases(user);
+					System.out.println("Purchases made by " + user.getName() + ":\n");
+					System.out.println(String.format("%-10s | %-6s | %-17s ", "Date", "Price", "Tracks"));
+					System.out.println("==================================================");
+					for (Purchase purchase : purchases) {
+						System.out.print(String.format("%-10s | %-6s | ", 
+								purchase.getPurchaseDate(), purchase.getPrice()));
+						for (Track track : purchase.getTracks()) {
+							System.out.print(track.getTitle() + ", ");
+						}
+						System.out.println();
+					}
+				} catch (IllegalArgumentException e) {
+					System.err.println(e.getMessage());
+					e.printStackTrace();
+				}
+			} else if(cmd.equals("Purchase") && args.length == 2) {
+				String username = args[1];
+				User user = null;
+				try {
+					user = service.getUser(username);
+					service.purchase(user);
+					System.out.println("Succesfully purchased tracks in users basket.");
+				} catch (IllegalArgumentException e) {
+					System.err.println(e.getMessage());
+					e.printStackTrace();
+				}
 			}
+			
 		} finally {
 			if(factory != null && !factory.isClosed()) {
 				factory.close();
 			}
 		}
-	}
-	
+	} 
+
 	public static void usage() {
 		System.out.println("Usage:\n");
 		System.out.println("\tjava uk.ac.bham.cs.jdbc.music.Main ShowArtists");
 		System.out.println("\tjava uk.ac.bham.cs.jdbc.music.Main ShowAlbums <artistName>");
-		System.out.println("\tjava uk.ac.bham.cs.jdbc.music.Main InsertArtist <artistName> <formationDate (dd-mm-yyyy)>");
+		System.out
+				.println("\tjava uk.ac.bham.cs.jdbc.music.Main InsertArtist <artistName> <formationDate (dd-mm-yyyy)>");
 		System.out.println("\tjava uk.ac.bham.cs.jdbc.music.Main ShowTrack <trackId>");
 	}
 }
