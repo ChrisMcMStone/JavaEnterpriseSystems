@@ -98,7 +98,7 @@ public class HibernateExercise extends HibernateClassTest implements MusicServic
 	}
 
 	@Override
-	public void purchase(User user) {
+	public void purchase(User user) throws IllegalArgumentException {
 		Session session = this.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		
@@ -113,9 +113,7 @@ public class HibernateExercise extends HibernateClassTest implements MusicServic
 				price += track.getPrice().doubleValue();
 			}
 			purchase.setPrice(price);
-			//tracks.clear();
 			session.save(purchase);
-			//session.saveOrUpdate(user);
 			
 			tx.commit();
 		} catch(HibernateException e) {

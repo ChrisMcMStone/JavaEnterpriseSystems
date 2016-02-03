@@ -56,8 +56,8 @@
 				<configuration>
 					<mainClass>uk.ac.bham.cs.hibernate.music.Main</mainClass>
 					<arguments>
-						<argument>ShowUser</argument>
-						<argument>cxm373</argument>
+						<argument>Purchase</argument>
+						<argument>txs142</argument>
 					</arguments>
 				</configuration>
 			</plugin>

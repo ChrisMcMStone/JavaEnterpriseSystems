@@ -16,7 +16,7 @@
 		<many-to-one name="user" column="users_id" class="UserImpl" not-null="true"/>
 
 		<!-- Many to Many with Track -->
-		<set name="tracks" table="purchase_track">
+		<set name="tracks" table="purchase_track" lazy="false">
 			<key column="purchase_id" not-null="true"/>
 			<many-to-many class="TrackImpl">
 				<column name="track_id" not-null="true"/>

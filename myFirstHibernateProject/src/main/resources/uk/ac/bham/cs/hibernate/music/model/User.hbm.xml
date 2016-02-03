@@ -16,7 +16,7 @@
 
 		<!--  One to Many relationship with Purchases -->
 		<set name="purchases" lazy="true" order-by="purchaseDate">
-			<key column="purchase_id"/>
+			<key column="users_id"/>
 			<one-to-many class="PurchaseImpl"/>
 		</set>
 
