@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+      "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="vehicles">
+	<subclass name="Aeroplane" extends="Vehicle" discriminator-value="a">
+		<property name="length" type="double" />
+		<property name="wingSpan" type="double" />
+		<property name="maxHeight" column="max_height" type="double" />
+	</subclass>
+</hibernate-mapping>

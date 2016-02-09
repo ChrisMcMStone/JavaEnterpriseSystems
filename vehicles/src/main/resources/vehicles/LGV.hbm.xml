@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+      "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="vehicles">
+	<subclass name="LGV" extends="Vehicle" discriminator-value="l">
+		<property name="numberOfAxles" column="number_of_axles" type="integer" />
+		<property name="maxWeight" column="max_weight" type="double" />
+	</subclass>
+</hibernate-mapping>
