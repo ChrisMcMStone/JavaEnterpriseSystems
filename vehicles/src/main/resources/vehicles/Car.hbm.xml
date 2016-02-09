@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+      "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="vehicles">
+	<subclass name="Car" extends="Vehicle" discriminator-value="c">
+		<property name="maxSpeed" column="max_speed" type="double"></property>	
+		<property name="isFourWheelDrive" column="four_wheel_drive" type="boolean"></property>	
+	</subclass>
+</hibernate-mapping>

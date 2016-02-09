@@ -20,7 +20,7 @@
         <property name="use_sql_comments">true</property>
 
         <!-- DDL Mode. -->
-        <property name="hbm2ddl.auto">update<!-- create-drop, create, update --></property>
+        <property name="hbm2ddl.auto">create<!-- create-drop, create, update --></property>
         <!--  -->
         <property name="hibernate.current_session_context_class">thread</property>
 
@@ -28,5 +28,8 @@
         <mapping resource="vehicles/Vehicle.hbm.xml" />
         <mapping resource="vehicles/VehicleTransport.hbm.xml" />
         <mapping resource="vehicles/LGV.hbm.xml" />
+        <mapping resource="vehicles/Aeroplane.hbm.xml" />
+        <mapping resource="vehicles/Submarine.hbm.xml" />
+        <mapping resource="vehicles/Car.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

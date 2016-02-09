@@ -65,16 +65,26 @@ public class Main {
 				
 				// Make an aeroplane model and save it (see HBM).
 				
+				Aeroplane a = new Aeroplane();
+				a.setMake("Boeing");
+				a.setModel("747");
+				a.setLength(250.0);
+				a.setWingSpan(200.0);
+				a.setMaxHeight(25.0);
+				session.save(a);
+				
 				// Make a submarine mapping, create the model and save it.
 				Submarine sub = new Submarine();
 				sub.setMaxDepth(3000.0);
 				session.save(sub);
 				
 				// Make a car model and mapping (make some properties up).
-				
-				// Each time look at the database to see what is happening.
-				//  for more information see:
-				//    https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/mapping.html
+				Car car = new Car();
+				car.setMake("Vauxhall");
+				car.setModel("Astra");
+				car.setIsFourWheelDrive(true);
+				car.setMaxSpeed(120.0);
+				session.save(car);
 				
 				tx.commit();
 			} catch(HibernateException e) {

@@ -1,24 +1,26 @@
 package vehicles;
 
-public class Submarine extends Vehicle {
-	/**
-	 * 
-	 */
-	private Double maxDepth;
+import java.util.Set;
 
-	/**
-	 * 
-	 * @return
-	 */
+public class Submarine extends Vehicle {
+
+	private Double maxDepth;
+	private Set<Car> cars;
+
 	public Double getMaxDepth() {
 		return maxDepth;
 	}
 
-	/**
-	 * 
-	 * @param maxDepth
-	 */
 	public void setMaxDepth(Double maxDepth) {
 		this.maxDepth = maxDepth;
 	}
+
+	public void setCars(Set<Car> cars) {
+		this.cars = cars;
+	}
+
+	public Set<Car> getCars() {
+		return cars;
+	}
+
 }
