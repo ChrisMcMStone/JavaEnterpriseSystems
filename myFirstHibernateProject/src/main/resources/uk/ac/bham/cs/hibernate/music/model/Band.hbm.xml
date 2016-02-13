@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="uk.ac.bham.cs.music.model.impl">
+    <subclass name="BandImpl"
+    extends="uk.ac.bham.cs.music.model.impl.ArtistImpl" discriminator-value="b">
+        <set name="artists" table="band_artist" inverse="false">
+            <key>
+            <column name="band_id"></column>
+            </key>
+            <one-to-many class="ArtistImpl" />
+        </set>
+	</subclass>
+</hibernate-mapping>

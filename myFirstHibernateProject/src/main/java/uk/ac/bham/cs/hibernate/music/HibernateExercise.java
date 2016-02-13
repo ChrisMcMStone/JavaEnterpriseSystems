@@ -50,6 +50,7 @@ public class HibernateExercise extends HibernateClassTest implements MusicServic
 		return user;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Purchase> getPurchases(User user) {
 		List<Purchase> purchases = null;

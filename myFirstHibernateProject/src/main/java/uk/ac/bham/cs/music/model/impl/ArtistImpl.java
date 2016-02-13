@@ -13,6 +13,17 @@ public class ArtistImpl implements Artist {
 	private LocalDate formationDate;
 	private LocalDate disbandmentDate;
 	private Set<Album> albums;
+	private BandImpl band;
+
+	@Override
+	public BandImpl getBand() {
+		return band;
+	}
+
+	@Override
+	public void setBand(BandImpl band) {
+		this.band = band;
+	}
 
 	@Override
 	public Integer getId() {
@@ -63,4 +74,6 @@ public class ArtistImpl implements Artist {
 	public void setAlbums(Set<Album> albums) {
 		this.albums = albums;
 	}
+	
+	
 }

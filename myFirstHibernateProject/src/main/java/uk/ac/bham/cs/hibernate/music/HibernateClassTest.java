@@ -16,6 +16,7 @@ import uk.ac.bham.cs.music.model.Album;
 import uk.ac.bham.cs.music.model.Artist;
 import uk.ac.bham.cs.music.model.Track;
 import uk.ac.bham.cs.music.model.impl.ArtistImpl;
+import uk.ac.bham.cs.music.model.impl.BandImpl;
 
 public class HibernateClassTest implements HibernateService, MusicService {
 	/**
@@ -129,6 +130,62 @@ public class HibernateClassTest implements HibernateService, MusicService {
 			Artist artist = new ArtistImpl();
 			artist.setName(name);
 			artist.setFormationDate(formationDate);
+			session.save(artist);
+			tx.commit();
+			
+		} catch (HibernateException e) {
+			if(tx != null) {
+				tx.rollback();
+			}
+			if(e instanceof ConstraintViolationException) {
+				throw new IllegalArgumentException("Artist \""+name+"\" already exists in database");
+			} else {
+				e.printStackTrace();
+			}
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void newBand(String name, LocalDate formationDate) throws IllegalArgumentException {
+		
+		Session session = this.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		
+		try {
+			Artist artist = new BandImpl();
+			artist.setName(name);
+			artist.setFormationDate(formationDate);
+			session.save(artist);
+			tx.commit();
+			
+		} catch (HibernateException e) {
+			if(tx != null) {
+				tx.rollback();
+			}
+			if(e instanceof ConstraintViolationException) {
+				throw new IllegalArgumentException("Artist \""+name+"\" already exists in database");
+			} else {
+				e.printStackTrace();
+			}
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void newBandMember(String name, LocalDate formationDate, String bandName) throws IllegalArgumentException {
+		
+		Session session = this.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		
+		try {
+			Artist artist = new ArtistImpl();
+			artist.setName(name);
+			artist.setFormationDate(formationDate);
+			Query query = session.createQuery("from ArtistImpl where name=:bandName");
+			query.setParameter("bandName", bandName);
+			BandImpl band = (BandImpl) query.uniqueResult();
+			artist.setBand(band);
 			session.save(artist);
 			tx.commit();
 			

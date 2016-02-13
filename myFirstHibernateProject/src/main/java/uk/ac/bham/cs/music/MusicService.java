@@ -52,6 +52,9 @@ public interface MusicService {
 	 */
 	public void newArtist(String name, LocalDate formationDate) throws IllegalArgumentException;
 	
+	public void newBandMember(String name, LocalDate formationDate, String bandName) throws IllegalArgumentException;
+	
+	
 	/**
 	 * @param id the track ID.
 	 * @return a track
@@ -59,4 +62,7 @@ public interface MusicService {
 	 * @throws SQLException on SQL error.
 	 */
 	public Track getTrackById(Integer id) throws IllegalArgumentException;
+
+
+	public void newBand(String name, LocalDate formationDate) throws IllegalArgumentException;
 }

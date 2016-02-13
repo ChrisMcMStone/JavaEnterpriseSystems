@@ -30,5 +30,6 @@
         <mapping resource="uk/ac/bham/cs/hibernate/music/model/Artist.hbm.xml" />
         <mapping resource="uk/ac/bham/cs/hibernate/music/model/User.hbm.xml" />
         <mapping resource="uk/ac/bham/cs/hibernate/music/model/Purchase.hbm.xml" />
+        <mapping resource="uk/ac/bham/cs/hibernate/music/model/Band.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

@@ -56,8 +56,10 @@
 				<configuration>
 					<mainClass>uk.ac.bham.cs.hibernate.music.Main</mainClass>
 					<arguments>
-						<argument>Purchase</argument>
-						<argument>txs142</argument>
+						<argument>InsertArtist</argument>
+						<argument>Billie Joe Armstrong</argument>
+						<argument>11-01-1995</argument>
+						<argument>Green Day</argument>
 					</arguments>
 				</configuration>
 			</plugin>

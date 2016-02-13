@@ -11,4 +11,5 @@ public interface HibernateService {
 	 * @return a session factory for use with a service.
 	 */
 	public SessionFactory getSessionFactory();
+
 }

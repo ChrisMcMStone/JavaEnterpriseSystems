@@ -4,6 +4,8 @@ import java.util.Set;
 
 import org.joda.time.LocalDate;
 
+import uk.ac.bham.cs.music.model.impl.BandImpl;
+
 public interface Artist {
 	/**
 	 * Get the artist's ID.
@@ -78,4 +80,8 @@ public interface Artist {
 	 * @param albums a list of albums.
 	 */
 	public void setAlbums(Set<Album> albums);
+
+	void setBand(BandImpl band);
+
+	BandImpl getBand();
 }

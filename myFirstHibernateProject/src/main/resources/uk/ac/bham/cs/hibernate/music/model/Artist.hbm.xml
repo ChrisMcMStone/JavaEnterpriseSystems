@@ -3,11 +3,12 @@
       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="uk.ac.bham.cs.music.model.impl">
-	<class name="ArtistImpl" table="artist">
+	<class name="ArtistImpl" table="artist" discriminator-value="a">
 		<id name="id">
 			<generator class="identity"/>
 				<!-- <param name = "sequence">artist_seq</param> -->
 		</id>
+		<discriminator column="type" type="character" />
 		<property name="name" not-null="true" unique="true" />
 		<property name="formationDate" not-null="true"
 			type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate" />
@@ -17,5 +18,8 @@
 			<key column="artist_id" />
 			<one-to-many class="AlbumImpl" />
 		</set>
+		<many-to-one name="band" class="BandImpl">
+			<column name="band_id"></column>
+		</many-to-one>
 	</class>
 </hibernate-mapping>

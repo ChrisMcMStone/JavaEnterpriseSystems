@@ -3,7 +3,6 @@ package uk.ac.bham.cs.music.model.impl;
 import java.util.Set;
 
 import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 
 import uk.ac.bham.cs.music.model.Purchase;
 import uk.ac.bham.cs.music.model.Track;
