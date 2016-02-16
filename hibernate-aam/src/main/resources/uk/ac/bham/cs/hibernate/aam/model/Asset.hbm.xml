@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+      "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="uk.ac.bham.cs.aam.model.impl">
+	<class name="AssetImpl" table="asset">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<version name="version" column="version" />
+		<property name="number" column="number" type="integer" unique="true" />
+		<property name="name" column="name" type="string" unique="true" />
+		<many-to-one name="assetType" class="AssetTypeImpl" column="asset_type_id" />
+
+	</class>
+</hibernate-mapping>
