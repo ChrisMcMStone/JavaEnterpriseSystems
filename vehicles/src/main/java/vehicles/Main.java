@@ -72,12 +72,7 @@ public class Main {
 				a.setWingSpan(200.0);
 				a.setMaxHeight(25.0);
 				session.save(a);
-				
-				// Make a submarine mapping, create the model and save it.
-				Submarine sub = new Submarine();
-				sub.setMaxDepth(3000.0);
-				session.save(sub);
-				
+
 				// Make a car model and mapping (make some properties up).
 				Car car = new Car();
 				car.setMake("Vauxhall");
@@ -85,6 +80,15 @@ public class Main {
 				car.setIsFourWheelDrive(true);
 				car.setMaxSpeed(120.0);
 				session.save(car);
+				
+				// Make a submarine mapping, create the model and save it.
+				Submarine sub = new Submarine();
+				sub.setMake("Trident");
+				sub.setMaxDepth(3000.0);
+				session.save(sub);
+				
+				sub.setCarLoad(car);
+				session.saveOrUpdate(sub);
 				
 				tx.commit();
 			} catch(HibernateException e) {

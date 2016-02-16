@@ -5,7 +5,7 @@ import java.util.Set;
 public class Submarine extends Vehicle {
 
 	private Double maxDepth;
-	private Set<Car> cars;
+	private Car carLoad;
 
 	public Double getMaxDepth() {
 		return maxDepth;
@@ -15,12 +15,11 @@ public class Submarine extends Vehicle {
 		this.maxDepth = maxDepth;
 	}
 
-	public void setCars(Set<Car> cars) {
-		this.cars = cars;
+	public Car getCarLoad() {
+		return carLoad;
 	}
 
-	public Set<Car> getCars() {
-		return cars;
+	public void setCarLoad(Car carLoad) {
+		this.carLoad = carLoad;
 	}
-
 }

@@ -7,7 +7,6 @@
 		<id name="id">
 			<generator class="native" />
 		</id>
-		
 		<discriminator column="type" type="character" />
 		<version name="version" />
 		<property name="make" type="string" />
