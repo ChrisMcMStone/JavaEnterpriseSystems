@@ -3,13 +3,17 @@ package uk.ac.bham.cs.hibernate.aam;
 import java.util.Set;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 
 import uk.ac.bham.cs.aam.model.Asset;
 import uk.ac.bham.cs.aam.model.AssetType;
+import uk.ac.bham.cs.aam.model.impl.AssetImpl;
+import uk.ac.bham.cs.aam.model.impl.AssetTypeImpl;
 
 public class Main {
 	public static void main(String[] args) {
@@ -36,10 +40,7 @@ public class Main {
 			}
 
 			// time to setup hibernate!
-			final ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure() // this
-																										// reads
-																										// hibernate.cfg.xml
-					.build();
+			final ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
 
 			try {
 				// create a session factory
@@ -54,7 +55,45 @@ public class Main {
 
 			// create the service
 			HibernateAAMExercise service = new HibernateAAMExercise(factory);
-			if (cmd.equals("ListAssetTypes") && args.length == 1) {
+			if (cmd.equals("create")) {
+				Session session = factory.getCurrentSession();
+				Transaction tx = session.beginTransaction();
+
+				try {
+
+					AssetType type1 = new AssetTypeImpl();
+					type1.setName("Electricals");
+					session.saveOrUpdate(type1);
+
+					AssetType type2 = new AssetTypeImpl();
+					type1.setName("Medicals");
+					session.saveOrUpdate(type2);
+
+					AssetType type3 = new AssetTypeImpl();
+					type1.setName("Plumbing");
+					session.saveOrUpdate(type3);
+
+					Asset asset1 = new AssetImpl();
+					asset1.setAssetType(type1);
+					asset1.setName("Kettle");
+					asset1.setNumber(123);
+					session.saveOrUpdate(asset1);
+
+					Asset asset2 = new AssetImpl();
+					asset2.setAssetType(type2);
+					asset2.setName("Bandages");
+					asset2.setNumber(124);
+					session.saveOrUpdate(asset2);
+
+					tx.commit();
+				} catch (HibernateException e) {
+					if (tx != null && tx.getStatus().canRollback()) {
+						tx.rollback();
+					}
+					System.err.println(e.getCause());
+				}
+
+			} else if (cmd.equals("ListAssetTypes") && args.length == 1) {
 				for (AssetType assetType : service.getAssetTypes()) {
 					System.out.println(assetType.getName());
 				}

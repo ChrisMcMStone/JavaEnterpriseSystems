@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="CustomerImpl" table="customer">
+        <id name="id" type="Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="version" type="Integer">
+            <column name="version" />
+        </property>
+        <property name="firstName" type="String">
+            <column name="firstname" />
+        </property>
+        <property name="lastName" type="String">
+            <column name="lastname" />
+        </property>
+        <property name="email" type="String">
+            <column name="email" />
+        </property>
+        <set name="work" table="work" inverse="false">
+            <key>
+                <column name="work_id" />
+            </key>
+            <one-to-many class="Work" />
+        </set>
+        <property name="address" type="String">
+            <column name="address" />
+        </property>
+    </class>
+</hibernate-mapping>

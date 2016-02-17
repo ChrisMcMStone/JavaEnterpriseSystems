@@ -5,7 +5,7 @@ import java.util.Set;
 import uk.ac.bham.cs.aam.model.Customer;
 import uk.ac.bham.cs.aam.model.Work;
 
-public class CustomerIml implements Customer {
+public class CustomerImpl implements Customer {
 	
 	private Integer id;
 	private Integer version;
