@@ -67,9 +67,7 @@ public class HibernateAAMExample implements HibernateService, AAMExample {
 		try {
 			AssetType assetType = new AssetTypeImpl();
 			assetType.setName(name);
-			
 			session.save(assetType);
-			
 			tx.commit();
 		} catch(ConstraintViolationException e) {
 			throw new IllegalArgumentException("An asset type with name `" + name + "' already exists.");

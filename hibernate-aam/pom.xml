@@ -58,7 +58,8 @@
         <configuration>
         	<mainClass>uk.ac.bham.cs.hibernate.aam.Main</mainClass>
         	<arguments>
-        		<argument>ListAssetTypes</argument>
+        		<argument>ListAssets</argument>
+        		<argument>1254</argument>
         	</arguments>
         </configuration>
   	  </plugin>
