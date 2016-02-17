@@ -1,7 +1,5 @@
 package vehicles;
 
-import java.util.Set;
-
 public class Submarine extends Vehicle {
 
 	private Double maxDepth;
