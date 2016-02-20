@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
-    <class name="uk.ac.bham.cs.aam.model.impl.WorkAllocationImpl" table="work_allocation">
-        <id name="id" type="java.lang.Integer">
+<hibernate-mapping package="uk.ac.bham.cs.aam.model.impl" >
+    <class name="WorkAllocationImpl" table="work_allocation">
+        <id name="id" type="integer">
             <column name="id" />
             <generator class="native" />
         </id>
-        <property name="version" type="java.lang.Integer">
+        <property name="version" type="integer">
             <column name="version" />
         </property>
         <property name="startDate" type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate">
@@ -16,20 +16,17 @@
         <property name="completionDate" type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate">
             <column name="completion_date" />
         </property>
-        <property name="description" type="java.lang.String">
+        <property name="description" type="string">
             <column name="description" />
         </property>
         <set name="details" table="work_detail" inverse="false" lazy="true">
             <key>
-                <column name="work_detail_id" />
+                <column name="work_allocation_id" />
             </key>
-            <one-to-many class="uk.ac.bham.cs.aam.model.WorkDetail" />
+            <one-to-many class="WorkDetailImpl" />
         </set>
-        <many-to-one name="work" class="uk.ac.bham.cs.aam.model.Work" fetch="join">
+        <many-to-one name="work" class="WorkImpl" >
             <column name="work_id" />
-        </many-to-one>
-        <many-to-one name="resource" class="uk.ac.bham.cs.aam.model.Resource" fetch="join">
-            <column name="resource_id" />
         </many-to-one>
     </class>
 </hibernate-mapping>

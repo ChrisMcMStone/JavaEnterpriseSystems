@@ -1,31 +1,31 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
+<hibernate-mapping package="uk.ac.bham.cs.aam.model.impl">
     <class name="CustomerImpl" table="customer">
-        <id name="id" type="Integer">
+        <id name="id" type="integer">
             <column name="id" />
             <generator class="native" />
         </id>
-        <property name="version" type="Integer">
+        <property name="version" type="integer">
             <column name="version" />
         </property>
-        <property name="firstName" type="String">
+        <property name="firstName" type="string">
             <column name="firstname" />
         </property>
-        <property name="lastName" type="String">
+        <property name="lastName" type="string">
             <column name="lastname" />
         </property>
-        <property name="email" type="String">
+        <property name="email" type="string">
             <column name="email" />
         </property>
-        <set name="work" table="work" inverse="false">
+        <set name="work" inverse="true">
             <key>
-                <column name="work_id" />
+                <column name="customer_id" />
             </key>
-            <one-to-many class="Work" />
+            <one-to-many class="WorkImpl" />
         </set>
-        <property name="address" type="String">
+        <property name="address" type="string">
             <column name="address" />
         </property>
     </class>

@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
+<hibernate-mapping package="uk.ac.bham.cs.aam.model.impl">
 	<class name="uk.ac.bham.cs.aam.model.impl.WorkImpl" table="work">
-		<id name="id" type="java.lang.Integer">
+		<id name="id" type="integer">
 			<column name="id" />
 			<generator class="native" />
 		</id>
-		<property name="version" type="java.lang.Integer">
+		<property name="version" type="integer">
 			<column name="version" />
 		</property>
-		<many-to-one name="customer" class="uk.ac.bham.cs.aam.model.Customer">
+		<many-to-one name="customer" class="CustomerImpl">
 			<column name="customer_id" />
 		</many-to-one>
 		<property name="startDate"
@@ -21,7 +21,7 @@
 			type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate">
 			<column name="completion_date" />
 		</property>
-		<many-to-one name="asset" class="uk.ac.bham.cs.aam.model.Asset">
+		<many-to-one name="asset" class="AssetImpl">
 			<column name="asset_id" />
 		</many-to-one>
 	</class>

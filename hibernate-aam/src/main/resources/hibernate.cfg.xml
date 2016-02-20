@@ -20,12 +20,17 @@
         <property name="use_sql_comments">true</property>
 
         <!-- DDL Mode. -->
-        <property name="hbm2ddl.auto">update<!-- create-drop, create, update --></property>
+        <property name="hbm2ddl.auto">create<!-- create-drop, create, update --></property>
         <!--  -->
         <property name="hibernate.current_session_context_class">thread</property>
 
         <!-- All our Hibernate mapping XML files. -->
         <mapping resource="uk/ac/bham/cs/hibernate/aam/model/Asset.hbm.xml" />
         <mapping resource="uk/ac/bham/cs/hibernate/aam/model/AssetType.hbm.xml" />
+        <mapping resource="uk/ac/bham/cs/hibernate/aam/model/Work.hbm.xml" />
+        <mapping resource="uk/ac/bham/cs/hibernate/aam/model/WorkAllocation.hbm.xml" />
+        <mapping resource="uk/ac/bham/cs/hibernate/aam/model/Resource.hbm.xml" />
+        <mapping resource="uk/ac/bham/cs/hibernate/aam/model/WorkDetail.hbm.xml" />
+        <mapping resource="uk/ac/bham/cs/hibernate/aam/model/Customer.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

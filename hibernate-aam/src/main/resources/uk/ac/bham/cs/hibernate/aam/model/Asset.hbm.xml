@@ -12,6 +12,6 @@
 			unique="true" />
 		<property name="name" column="name" type="string" unique="true" />
 		<many-to-one name="assetType" class="AssetTypeImpl"
-			column="asset_type_id" lazy="false" />
+			column="asset_type_id" lazy="false" not-null="true"/>
 	</class>
 </hibernate-mapping>
