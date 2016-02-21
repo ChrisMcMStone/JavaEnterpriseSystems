@@ -1,19 +1,26 @@
 package uk.ac.bham.cs.hibernate.aam;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
+import org.joda.time.LocalDate;
 
 import uk.ac.bham.cs.aam.model.Asset;
 import uk.ac.bham.cs.aam.model.AssetType;
+import uk.ac.bham.cs.aam.model.Customer;
+import uk.ac.bham.cs.aam.model.Work;
 import uk.ac.bham.cs.aam.model.impl.AssetImpl;
 import uk.ac.bham.cs.aam.model.impl.AssetTypeImpl;
+import uk.ac.bham.cs.aam.model.impl.CustomerImpl;
+import uk.ac.bham.cs.aam.model.impl.WorkImpl;
 
 public class Main {
 	public static void main(String[] args) {
@@ -84,7 +91,38 @@ public class Main {
 					asset2.setName("Bandages");
 					asset2.setNumber(124);
 					session.saveOrUpdate(asset2);
+					
+					Customer cust1 = new CustomerImpl();
+					cust1.setFirstName("Chris");
+					cust1.setLastName("Stone");
+					cust1.setEmail("asd@asfas.com");
+					session.save(cust1);
 
+					Query query = session.createQuery("from CustomerImpl where id = 6");
+					Customer cust1Persist = (Customer) query.uniqueResult();
+					
+					Work job1 = new WorkImpl();
+					job1.setAsset(asset1);
+					job1.setStartDate(new LocalDate());
+					job1.setCustomer(cust1Persist);
+					session.save(job1);
+
+					tx.commit();
+				} catch (HibernateException e) {
+					if (tx != null && tx.getStatus().canRollback()) {
+						tx.rollback();
+					}
+					System.err.println(e.getCause());
+				}
+
+			} else if (cmd.equals("delete")) {
+				Session session = factory.getCurrentSession();
+				Transaction tx = session.beginTransaction();
+
+				try {
+					Query query = session.createQuery("delete CustomerImpl where firstname = :name");
+					query.setParameter("name", "Chris");
+					query.executeUpdate();
 					tx.commit();
 				} catch (HibernateException e) {
 					if (tx != null && tx.getStatus().canRollback()) {

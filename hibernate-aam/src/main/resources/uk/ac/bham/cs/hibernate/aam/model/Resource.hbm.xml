@@ -7,9 +7,7 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-        <property name="version" type="integer">
-            <column name="version" />
-        </property>
+        <version name="version" />
         <property name="firstName" type="string">
             <column name="firstname" />
         </property>

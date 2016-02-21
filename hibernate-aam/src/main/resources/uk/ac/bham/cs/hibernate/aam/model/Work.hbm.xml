@@ -7,10 +7,8 @@
 			<column name="id" />
 			<generator class="native" />
 		</id>
-		<property name="version" type="integer">
-			<column name="version" />
-		</property>
-		<many-to-one name="customer" class="CustomerImpl">
+		<version name="version"/>
+		<many-to-one name="customer" class="CustomerImpl" >
 			<column name="customer_id" />
 		</many-to-one>
 		<property name="startDate"
