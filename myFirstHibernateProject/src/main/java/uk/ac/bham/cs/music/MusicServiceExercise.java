@@ -3,6 +3,8 @@ package uk.ac.bham.cs.music;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.joda.time.LocalDate;
+
 import uk.ac.bham.cs.music.model.Purchase;
 import uk.ac.bham.cs.music.model.Track;
 import uk.ac.bham.cs.music.model.User;
@@ -52,4 +54,8 @@ public interface MusicServiceExercise extends MusicService {
 	 * @param user purchase the user's input.
 	 */
 	public void purchase(User user);
+
+	public void newAlbum(String name, String artistName, LocalDate releaseDate, Double price);
+
+	public void deleteAlbum(String artistName, String albumName);
 }

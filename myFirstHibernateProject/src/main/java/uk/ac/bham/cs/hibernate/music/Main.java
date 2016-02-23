@@ -90,6 +90,29 @@ public class Main {
 				} catch (NumberFormatException e) {
 					System.err.println(String.format("'%s' is not a valid track number.", args[1]));
 				}
+			} else if(cmd.equals("AddAlbum") ) {
+				if(args.length == 5) {
+					LocalDate releaseDate = null;
+					try {
+						String name = args[1];
+						String artistName = args[2];
+						releaseDate = LocalDate.parse(args[3], DateTimeFormat.forPattern("dd-mm-yyyy"));
+						Double price = Double.parseDouble(args[4]);
+						service.newAlbum(name, artistName, releaseDate, price);
+						System.out.println("Album added successfully.");
+					} catch (IllegalArgumentException e) {
+						System.err.println(e.getMessage());
+					}
+				} else {
+					System.err.println("Invalid arguments for adding album.");
+				}
+			} else if(cmd.equals("DeleteAlbum") && args.length == 3) {
+				try {
+					service.deleteAlbum(args[1], args[2]);
+					System.out.println("Album deleted successfully.");
+				} catch(IllegalArgumentException e) {
+					System.err.println(e.getMessage());
+				}
 			} else if (cmd.equals("InsertArtist")) {
 				if (args.length == 3) {
 					LocalDate formationDate = null;
