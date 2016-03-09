@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+      "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="uk.ac.bham.cs.music.model.impl">
+	<class name="PurchaseImpl" table="purchase">
+		<id name="id">
+			<generator class="identity"/>
+			<!-- use identity class for generating individual sequence-->
+		</id>
+		<property name="purchaseDate" not-null="true"
+			type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate" />
+		<property name="price" not-null="true" type="double" />
+
+		<!-- Many to One with User -->
+		<many-to-one name="user" column="users_id" class="UserImpl" not-null="true"/>
+
+		<!-- Many to Many with Track -->
+		<set name="tracks" table="purchase_track" lazy="false">
+			<key column="purchase_id" not-null="true"/>
+			<many-to-many class="TrackImpl">
+				<column name="track_id" not-null="true"/>
+			</many-to-many>
+		</set>
+
+	</class>
+</hibernate-mapping>
+
+
+<!-- Ask:
+- Naming sequences
+- Lazy property
+- Order by property -->

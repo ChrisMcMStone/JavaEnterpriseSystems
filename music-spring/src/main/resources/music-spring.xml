@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName"            value="org.postgresql.Driver"/>
+        <property name="url"                        value="jdbc:postgresql://localhost/music"/>
+        <property name="username"                   value="chris"/>
+        <property name="password"                   value="test"/>
+        <property name="validationQuery"            value="SELECT 1+1"/>
+    </bean>
+
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+			<list>
+				<value>uk/ac/bham/cs/music/hibernate/mappings/Artist.hbm.xml</value>
+				<value>uk/ac/bham/cs/music/hibernate/mappings/Album.hbm.xml</value>
+				<value>uk/ac/bham/cs/music/hibernate/mappings/Track.hbm.xml</value>
+				<value>uk/ac/bham/cs/music/hibernate/mappings/Purchase.hbm.xml</value>
+				<value>uk/ac/bham/cs/music/hibernate/mappings/User.hbm.xml</value>
+			</list>
+		</property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="trackDAO" class="uk.ac.bham.cs.music.hibernate.dao.impl.TrackDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="artistDAO" class="uk.ac.bham.cs.music.hibernate.dao.impl.ArtistDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <!-- this is the service object that we want to make transactional -->
+    <bean id="musicService" class="uk.ac.bham.cs.music.hibernate.HibernateClassTest">
+        <property name="trackDAO" ref="trackDAO" />
+        <property name="artistDAO" ref="artistDAO" />
+    </bean>
+
+    <!-- 
+    Propagation options: (default is REQUIRED)
+    "REQUIRED": must run in a transaction, will use current one, start new one if there is none
+	"SUPPORTS": does not require a transaction, will use one if it exists
+	"MANDATORY": must run in a transaction, will throw exception if none exists
+	"REQUIRES_NEW": must run it its own transaction: will start one, and suspend any existing one if necessary
+	"NOT_SUPPORTED": should NOT run in a transaction, will suspend any existing one if necessary
+	"NEVER": should NOT run in a transaction, will throw exception if one exists
+	"NESTED": Should be run in a new nested transaction if a transaction exists, otherwise, works as "REQUIRED"
+    -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager" >
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+ 		<tx:attributes>
+ 			<tx:method name="new*" propagation="REQUIRES_NEW" />
+ 			<tx:method name="*" />
+ 		</tx:attributes>   
+    </tx:advice>
+    
+    <aop:config proxy-target-class="true">
+    	<aop:pointcut expression="execution(* uk.ac.bham.cs.music.hibernate.HibernateClassTest.*(..))" id="musicServiceOperation" />
+    	<aop:advisor advice-ref="transactionAdvice" pointcut-ref="musicServiceOperation" />
+    </aop:config>
+</beans>
