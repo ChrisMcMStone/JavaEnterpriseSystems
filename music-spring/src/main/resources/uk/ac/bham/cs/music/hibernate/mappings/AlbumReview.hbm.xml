@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+      "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="uk.ac.bham.cs.music.model.impl">
+	<class name="AlbumReviewImpl" table="album_review">
+		<id name="id">
+			<generator class="identity" />
+		</id>
+		<property name="review" not-null="true" />
+		<many-to-one name="user" class="UserImpl" column="author_id" />
+		<many-to-one name="album" class="AlbumImpl" column="album_id" />
+	</class>
+</hibernate-mapping>

@@ -27,6 +27,7 @@
 				<value>uk/ac/bham/cs/music/hibernate/mappings/Track.hbm.xml</value>
 				<value>uk/ac/bham/cs/music/hibernate/mappings/Purchase.hbm.xml</value>
 				<value>uk/ac/bham/cs/music/hibernate/mappings/User.hbm.xml</value>
+				<value>uk/ac/bham/cs/music/hibernate/mappings/AlbumReview.hbm.xml</value>
 			</list>
 		</property>
         <property name="hibernateProperties">
@@ -47,10 +48,30 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
+    <bean id="userDAO" class="uk.ac.bham.cs.music.hibernate.dao.impl.UserDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="albumDAO" class="uk.ac.bham.cs.music.hibernate.dao.impl.AlbumDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="purchaseDAO" class="uk.ac.bham.cs.music.hibernate.dao.impl.PurchaseDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="albumReviewDAO" class="uk.ac.bham.cs.music.hibernate.dao.impl.AlbumReviewDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    
     <!-- this is the service object that we want to make transactional -->
-    <bean id="musicService" class="uk.ac.bham.cs.music.hibernate.HibernateClassTest">
+    <bean id="musicService" class="uk.ac.bham.cs.music.hibernate.HibernateExercise">
         <property name="trackDAO" ref="trackDAO" />
         <property name="artistDAO" ref="artistDAO" />
+        <property name="albumDAO" ref="albumDAO" />
+        <property name="purchaseDAO" ref="purchaseDAO" />
+        <property name="userDAO" ref="userDAO" />
+        <property name="albumReviewDAO" ref="albumReviewDAO" />
     </bean>
 
     <!-- 
@@ -75,7 +96,7 @@
     </tx:advice>
     
     <aop:config proxy-target-class="true">
-    	<aop:pointcut expression="execution(* uk.ac.bham.cs.music.hibernate.HibernateClassTest.*(..))" id="musicServiceOperation" />
+    	<aop:pointcut expression="execution(* uk.ac.bham.cs.music.hibernate.Hibernate*.*(..))" id="musicServiceOperation" />
     	<aop:advisor advice-ref="transactionAdvice" pointcut-ref="musicServiceOperation" />
     </aop:config>
 </beans>

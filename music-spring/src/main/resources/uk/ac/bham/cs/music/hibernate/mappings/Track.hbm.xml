@@ -5,7 +5,7 @@
 <hibernate-mapping package="uk.ac.bham.cs.music.model.impl">
 	<class name="TrackImpl" table="track">
 		<id name="id">
-			<generator class="native" />
+			<generator class="identity" />
 		</id>
 		<property name="title" not-null="true" />
 		<property name="length" not-null="true"

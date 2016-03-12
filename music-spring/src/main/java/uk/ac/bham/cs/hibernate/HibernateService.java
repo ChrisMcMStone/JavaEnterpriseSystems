@@ -1,6 +1,7 @@
 package uk.ac.bham.cs.hibernate;
 
 import uk.ac.bham.cs.music.dao.AlbumDAO;
+import uk.ac.bham.cs.music.dao.AlbumReviewDAO;
 import uk.ac.bham.cs.music.dao.PurchaseDAO;
 import uk.ac.bham.cs.music.dao.TrackDAO;
 import uk.ac.bham.cs.music.dao.ArtistDAO;
@@ -71,4 +72,8 @@ public interface HibernateService {
 	 * @param purchaseDAO
 	 */
 	public void setPurchaseDAO(PurchaseDAO purchaseDAO);
+	
+	public void setAlbumReviewDAO(AlbumReviewDAO albumReviewDAO);
+	
+	public AlbumReviewDAO getAlbumReviewDAO();
 }

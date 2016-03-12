@@ -31,4 +31,6 @@ public interface AlbumDAO {
 	 * @param album
 	 */
 	public void save(Album album);
+	
+	public Album getAlbumWithReviews(Integer id);
 }

@@ -96,4 +96,7 @@ public interface Album {
 	 * @param tracks a list of tracks.
 	 */
 	public void setTracks(Set<Track> tracks);
+	
+	public void setReviews(Set<AlbumReview> reviews);
+	public Set<AlbumReview> getReviews();
 }

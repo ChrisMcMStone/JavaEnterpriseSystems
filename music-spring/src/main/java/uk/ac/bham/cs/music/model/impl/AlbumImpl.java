@@ -5,6 +5,7 @@ import java.util.Set;
 import org.joda.time.LocalDate;
 
 import uk.ac.bham.cs.music.model.Album;
+import uk.ac.bham.cs.music.model.AlbumReview;
 import uk.ac.bham.cs.music.model.Artist;
 import uk.ac.bham.cs.music.model.Track;
 
@@ -16,6 +17,7 @@ public class AlbumImpl implements Album {
 	private LocalDate releaseDate;
 	private String name;
 	private Integer id;
+	private Set<AlbumReview> reviews;
 
 	@Override
 	public Integer getId() {
@@ -75,5 +77,15 @@ public class AlbumImpl implements Album {
 	@Override
 	public void setTracks(Set<Track> tracks) {
 		this.tracks = tracks;
+	}
+
+	@Override
+	public void setReviews(Set<AlbumReview> reviews) {
+		this.reviews = reviews;
+	}
+
+	@Override
+	public Set<AlbumReview> getReviews() {
+		return reviews;
 	}
 }

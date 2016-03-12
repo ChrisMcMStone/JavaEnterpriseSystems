@@ -2,6 +2,7 @@ package uk.ac.bham.cs.music.hibernate.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -45,6 +46,7 @@ public class ArtistDAOImpl implements ArtistDAO {
 				.getCurrentSession()
 				.createCriteria(ArtistImpl.class)
 				.add(Restrictions.eq("name", name))
+				.setFetchMode("albums", FetchMode.EAGER)
 				.uniqueResult();
 	}
 

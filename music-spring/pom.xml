@@ -75,7 +75,11 @@
         <configuration>
         	<mainClass>uk.ac.bham.cs.music.hibernate.Main</mainClass>
         	<arguments>
-        		<argument>populate</argument>
+        	<argument>AddReview</argument>
+        	<argument>cxm373</argument>
+        	<argument>Pink Floyd</argument>
+        	<argument>The Dark Side of the Moon</argument>
+        	<argument>Rubbish album.</argument>
         	</arguments>
         </configuration>
   	  </plugin>

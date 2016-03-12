@@ -9,8 +9,8 @@
 			<!-- use identity class for generating individual sequence-->
 		</id>
 		<property name="purchaseDate" not-null="true"
-			type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate" />
-		<property name="price" not-null="true" type="double" />
+			type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime" />
+		<property name="price" type="double" />
 
 		<!-- Many to One with User -->
 		<many-to-one name="user" column="users_id" class="UserImpl" not-null="true"/>

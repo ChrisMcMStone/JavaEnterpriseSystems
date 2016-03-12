@@ -5,7 +5,7 @@
 <hibernate-mapping package="uk.ac.bham.cs.music.model.impl">
 	<class name="AlbumImpl" table="album">
 		<id name="id">
-			<generator class="native" />
+			<generator class="identity" />
 		</id>
 		<properties name="album_unique" unique="true">
 			<property name="name" not-null="true" />
@@ -20,5 +20,9 @@
 			</many-to-many>
 		</set>
 		<property name="price" not-null="true" type="double" />
+		<set name="reviews" lazy="true">
+			<key column="album_id" />
+			<one-to-many class="AlbumReviewImpl" />
+		</set>
 	</class>
 </hibernate-mapping>
